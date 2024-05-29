@@ -4,7 +4,7 @@
     enable = true;
     
     userName = "firfly";
-    userEmail = "firfly.net@qq.com";
+    userEmail = "9134769+firfly@users.noreply.github.com";
     
     extraConfig = { 
       init.defaultBranch = "main";
