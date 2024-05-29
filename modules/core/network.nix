@@ -1,11 +1,11 @@
-{ pkgs, ... }: 
+{ pkgs, username, ... }: 
 {
   networking = {
-    hostName = "nixos";
+    hostName = "${username}-nixos";
     networkmanager.enable = true;
-    nameservers = [ "1.1.1.1" ];
+    nameservers = [ "221.179.155.161" ];
     firewall = {
-      enable = true;
+      enable = false;
       allowedTCPPorts = [ 22 80 443 59010 59011 ];
       allowedUDPPorts = [ 59010 59011 ];
       # allowedUDPPortRanges = [

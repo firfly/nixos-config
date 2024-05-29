@@ -3,6 +3,8 @@
   services.xserver = {
     enable = true;
     xkb.layout = "us";
+    xkb.variant = "colemak";
+    xkb.options = "ctrl:nocaps";
 
     displayManager.autoLogin = {
       enable = true;
