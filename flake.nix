@@ -12,6 +12,11 @@
   
     nix-gaming.url = "github:fufexan/nix-gaming";
   
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  
     hyprland = {
       url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -36,7 +41,7 @@
     };
   };
 
-  outputs = { nixpkgs, self, ...} @ inputs:
+  outputs = { nixpkgs, self, agenix, ...} @ inputs:
   let
     selfPkgs = import ./pkgs;
     username = "firfly";
@@ -52,17 +57,29 @@
     nixosConfigurations = {
       desktop = nixpkgs.lib.nixosSystem {
         inherit system;
-        modules = [ (import ./hosts/desktop) ];
+        modules = [ 
+		(import ./hosts/desktop) 
+		agenix.nixosModules.default
+		{ environment.systemPackages = [ agenix.packages.${system}.default ]; }
+		];
         specialArgs = { host="desktop"; inherit self inputs username ; };
       };
       laptop = nixpkgs.lib.nixosSystem {
         inherit system;
-        modules = [ (import ./hosts/laptop) ];
+        modules = [ 
+		(import ./hosts/laptop)
+		agenix.nixosModules.default
+		{ environment.systemPackages = [ agenix.packages.${system}.default ]; }
+		];
         specialArgs = { host="laptop"; inherit self inputs username ; };
       };
        vm = nixpkgs.lib.nixosSystem {
         inherit system;
-        modules = [ (import ./hosts/vm) ];
+        modules = [ 
+		(import ./hosts/vm)
+		agenix.nixosModules.default
+		{ environment.systemPackages = [ agenix.packages.${system}.default ]; }
+		];
         specialArgs = { host="vm"; inherit self inputs username ; };
       };
     };
