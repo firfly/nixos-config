@@ -16,6 +16,16 @@
     # thermald.enable = true;
     # cpupower-gui.enable = true;
     power-profiles-daemon.enable = true;
+
+    openssh = {
+      enable =true;
+      ports = [22];
+      settings = {
+	PasswordAuthentication = true;
+	PermitRootLogin = "no";
+	# protocol = "2";
+      };
+    };
  
     upower = {
       enable = true;
