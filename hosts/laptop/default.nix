@@ -22,7 +22,7 @@
       ports = [22];
       settings = {
 	PasswordAuthentication = true;
-	PermitRootLogin = "no";
+	PermitRootLogin = "yes";
 	# protocol = "2";
       };
     };

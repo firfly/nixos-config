@@ -1,7 +1,8 @@
 {
-  description = "FrostPhoenix's nixos configuration";
+  description = "Firfly's nixos configuration";
 
   inputs = {
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.11";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nur.url = "github:nix-community/NUR";
   
@@ -15,6 +16,13 @@
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+
+    # dae
+    daeuniverse = {
+      url = "github:daeuniverse/flake.nix";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
     };
   
     hyprland = {
@@ -61,8 +69,10 @@
 		(import ./hosts/desktop) 
 		agenix.nixosModules.default
 		{ environment.systemPackages = [ agenix.packages.${system}.default ]; }
+		inputs.daeuniverse.nixosModules.dae
+                inputs.daeuniverse.nixosModules.daed
 		];
-        specialArgs = { host="desktop"; inherit self inputs username ; };
+        specialArgs = { host="desktop"; inherit self inputs username system ; };
       };
       laptop = nixpkgs.lib.nixosSystem {
         inherit system;
@@ -70,8 +80,10 @@
 		(import ./hosts/laptop)
 		agenix.nixosModules.default
 		{ environment.systemPackages = [ agenix.packages.${system}.default ]; }
+		inputs.daeuniverse.nixosModules.dae
+                inputs.daeuniverse.nixosModules.daed
 		];
-        specialArgs = { host="laptop"; inherit self inputs username ; };
+        specialArgs = { host="laptop"; inherit self inputs username system ; };
       };
        vm = nixpkgs.lib.nixosSystem {
         inherit system;
@@ -79,8 +91,10 @@
 		(import ./hosts/vm)
 		agenix.nixosModules.default
 		{ environment.systemPackages = [ agenix.packages.${system}.default ]; }
+		inputs.daeuniverse.nixosModules.dae
+                inputs.daeuniverse.nixosModules.daed
 		];
-        specialArgs = { host="vm"; inherit self inputs username ; };
+        specialArgs = { host="vm"; inherit self inputs username system ; };
       };
     };
   };
