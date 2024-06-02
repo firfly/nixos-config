@@ -3,6 +3,7 @@
        [(import ./aseprite/aseprite.nix)]         # pixel art editor
     ++ [(import ./audacious/audacious.nix)]       # music player
     ++ [(import ./bat.nix)]                       # better cat command
+    ++ [(import ./emacs.nix)]                     # emacs editor
     ++ [(import ./btop.nix)]                      # resouces monitor 
     ++ [(import ./cava.nix)]                      # audio visualizer
     ++ [(import ./discord.nix)]                   # discord with catppuccin theme

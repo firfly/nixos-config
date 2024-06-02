@@ -43,7 +43,12 @@
     jq
   ];
 
-  environment.variables.EDITOR = "nvim";
+  environment.variables = {
+    EDITOR = "nvim";
+    http_proxy = "127.0.0.1:7890";
+    https_proxy = "127.0.0.1:7890";
+    all_proxy = "127.0.0.1:7890";
+  };
 
   time.timeZone = "Asia/Shanghai";
   i18n = {
