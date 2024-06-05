@@ -17,8 +17,8 @@
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
- #   Neve.url = "github:firfly/Neve";
+    nixvim.url = "github:nix-community/nixvim";
+    Neve.url = "github:redyf/Neve";
 
     # dae
     daeuniverse = {

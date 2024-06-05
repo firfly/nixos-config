@@ -65,11 +65,12 @@
     ranger
     nnn
     alacritty
-    neovim
+ #   neovim
     nix-bash-completions
     unzip
     pkg-config
     jq
+    inputs.Neve.packages.${pkgs.system}.default
   ];
 
   environment.variables = {
