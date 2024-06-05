@@ -1,9 +1,14 @@
-{ self, pkgs, lib, inputs, ...}: 
+{ self, pkgs, lib, config, inputs, ...}: 
 {
   # imports = [ inputs.nix-gaming.nixosModules.default ];
   nix = {
     settings = {
+      warn-dirty = false;
+      trusted-users = ["@wheel"];
       auto-optimise-store = true;
+      max-jobs = "auto";
+      log-lines = 20;
+      user-agent-suffix = "NixOS unstable";
       experimental-features = [ "nix-command" "flakes" ];
       substituters = [
         # cache mirror located in China
@@ -12,10 +17,34 @@
 	# status: https://mirrors.ustc.edu.cn/status/
 	"https://mirrors.ustc.edu.cn/nix-channels/store"
         "https://nix-gaming.cachix.org"
-
 	];
-      trusted-public-keys = [ "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4=" ];
+
+      trusted-substituters = [
+        "https://cache.nixos.org/"
+        "https://nixpkgs-wayland.cachix.org"
+        "https://ros.cachix.org"
+      ];
+
+      trusted-public-keys = [
+        "nixpkgs.cachix.org-1:q91R6hxbwFvDqTSDKwDAV4T5PxqXGxswD8vhONFMeOE="
+        "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
+        "ros.cachix.org-1:dSyZxI8geDCJrwgvCOHDoAfOm5sV1wCPjBkKL+38Rvo="
+        "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4=" 
+      ];
+    # nix community`s cache server
+      extra-trusted-substituters = [
+        "https://nix-community.cachix.org"
+        "https://hyprland.cachix.org"
+      ];
+      extra-trusted-public-keys = [
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+        "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+      ];
     };
+
+    extraOptions = lib.mkIf (config.age.secrets ? nix-access-tokens-github) ''
+      !include ${config.age.secrets.nix-access-tokens-github.path}
+    '';
     gc = {
       automatic = true;
       dates = "weekly";

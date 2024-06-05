@@ -1,5 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
+ # home.packages = [
+ #   inputs.Neve.packages.${pkgs.system}.default
+ # ];
   programs.neovim = {
     enable = true;
     vimAlias = true;

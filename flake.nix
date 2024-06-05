@@ -18,6 +18,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+ #   Neve.url = "github:firfly/Neve";
+
     # dae
     daeuniverse = {
       url = "github:daeuniverse/flake.nix";
@@ -25,8 +27,9 @@
     };
   
     hyprland = {
-      url = "github:hyprwm/Hyprland";
-      inputs.nixpkgs.follows = "nixpkgs";
+#      url = "github:hyprwm/Hyprland";
+      url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+ #     inputs.nixpkgs.follows = "nixpkgs";
     };
   
     home-manager = {

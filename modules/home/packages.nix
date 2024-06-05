@@ -58,5 +58,6 @@
     xdg-utils
     xxd
     inputs.alejandra.defaultPackage.${system}
+ #   inputs.Neve.packages.${system}.default
   ]);
 }

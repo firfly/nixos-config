@@ -6,16 +6,16 @@
     xkb.variant = "colemak";
     xkb.options = "ctrl:nocaps";
 
-    displayManager.autoLogin = {
+  };
+  services.displayManager.autoLogin = {
       enable = true;
       user = "${username}";
-    };
-    libinput = {
+  };
+  services.libinput = {
       enable = true;
       # mouse = {
       #   accelProfile = "flat";
       # };
-    };
   };
   # To prevent getting stuck at shutdown
   systemd.extraConfig = "DefaultTimeoutStopSec=10s";
